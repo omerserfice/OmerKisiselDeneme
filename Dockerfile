@@ -1,18 +1,18 @@
-# Build stage
+# Build aşaması
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["OmerKisielDeneme/OmerKisielDeneme.csproj", "OmerKisielDeneme/"]
-RUN dotnet restore "OmerKisielDeneme/OmerKisielDeneme.csproj"
+COPY ["OmerKisiselDeneme/OmerKisiselDeneme.csproj", "OmerKisiselDeneme/"]
+RUN dotnet restore "OmerKisiselDeneme/OmerKisiselDeneme.csproj"
 COPY . .
-WORKDIR "/src/OmerKisielDeneme"
-RUN dotnet build "OmerKisielDeneme.csproj" -c Release -o /app/build
+WORKDIR "/src/OmerKisiselDeneme"
+RUN dotnet build "OmerKisiselDeneme.csproj" -c Release -o /app/build
 
-# Publish stage
+# Publish aşaması
 FROM build AS publish
-RUN dotnet publish "OmerKisielDeneme.csproj" -c Release -o /app/publish
+RUN dotnet publish "OmerKisiselDeneme.csproj" -c Release -o /app/publish
 
-# Final stage
+# Runtime aşaması
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "OmerKisielDeneme.dll"]
+ENTRYPOINT ["dotnet", "OmerKisiselDeneme.dll"]
