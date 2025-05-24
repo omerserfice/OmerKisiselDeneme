@@ -1,10 +1,10 @@
 {
     "family": "omer-kisisel-task",
     "networkMode": "awsvpc",
-    "executionRoleArn": "arn:aws:ecs:us-east-1:522354331614:task/omer-kisisel-ecs-cluster/34835d63c9d146ebacaba28e4cd1719d",
+    "executionRoleArn": "arn:aws:iam::522354331614:role/ecsTaskExecutionRole",
     "containerDefinitions": [
       {
-        "name": "omer-kisisel-deneme",
+        "name": "omer-kisisel-container",
         "image": "IMAGE_URI",
         "portMappings": [
           {
