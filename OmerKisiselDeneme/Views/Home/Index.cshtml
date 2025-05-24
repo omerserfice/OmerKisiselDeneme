@@ -1,52 +1,173 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ömer Yılmaz | Yazılım Geliştirici</title>
+  <title>Ömer Serfice | Full Stack Developer</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
   <style>
     body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Urbanist', sans-serif;
+    }
+
+    .main-container {
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #f8f9fa;
-    }
-    .profile {
-      display: flex;
+      padding: 40px 20px;
       flex-direction: column;
-      align-items: center;
-      text-align: center;
     }
-    .profile img {
+
+    .profile-container {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      gap: 40px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+      text-align: left;
+    }
+
+    .profile-container img {
       width: 200px;
       height: 200px;
       object-fit: cover;
       border-radius: 50%;
-      border: 4px solid #343a40;
-      margin-bottom: 20px;
+      border: 4px solid #fff;
     }
-    .profile h1 {
+
+    .profile-text h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .profile-text p {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: #ccc;
+    }
+
+    .skills-section {
+      max-width: 800px;
+      text-align: left;
+    }
+
+    .skills-section h2 {
       font-size: 2rem;
-      font-weight: bold;
+      font-weight: 700;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #fff;
+      display: inline-block;
+      padding-bottom: 5px;
     }
-    .profile p {
-      font-size: 1.2rem;
-      color: #6c757d;
+
+    .skills-list {
+      font-size: 1.1rem;
+      color: #ddd;
+      line-height: 1.8;
+      white-space: pre-line;
     }
+
+    @@media (max-width: 768px) {
+      .profile-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .skills-section {
+        text-align: center;
+      }
+    }
+      .social-icon {
+    font-size: 2rem;
+    color: #fff;
+    text-decoration: none;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+    /* text-shadow: 0 4px 8px rgba(255, 255, 255, 0.4); */
+  }
+
+  .social-icon:hover {
+    transform: scale(1.2);
+    text-shadow: 0 6px 12px rgba(255, 255, 255, 0.6);
+  }
+ .social-icon {
+    font-size: 2rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+  }
+
+  .social-icon.github {
+    color: #333;
+  }
+
+  .social-icon.linkedin {
+    color: #0A66C2;
+  }
+
+  .social-icon.instagram {
+    color: #E1306C;
+  }
+
+  .social-icon.website {
+    color: #28a745;
+  }
+
+  .social-icon:hover {
+    transform: scale(1.2);
+    text-shadow: 0 6px 12px rgba(255, 255, 255, 0.6);
+  }
   </style>
 </head>
 <body>
 
-<div class="profile">
-  <img src="https://via.placeholder.com/200" alt="Profil Fotoğrafı">
-  <h1>Ömer Yılmaz</h1>
-  <p>Yazılım Geliştirici | Web • Mobil • Masaüstü</p>
+<div class="main-container">
+
+  <!-- Profil Alanı -->
+  <div class="profile-container">
+    <img src="https://media.licdn.com/dms/image/v2/D5603AQEKq3aJAqanGQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1713216841114?e=2147483647&v=beta&t=Xq_LQTdpcvZ2OXIAU2uU2bfPQQxw0-WpgGWROHevzqs" alt="Ömer Serfice">
+    <div class="profile-text">
+      <h1>Ömer Serfice</h1>
+      <p>Full Stack Developer | Web • Mobil • Masaüstü</p>
+    </div>
+  </div>
+<div class="d-flex justify-content-center gap-4 mb-4 mt-5">
+  <a href="https://github.com/kullanicin" target="_blank" class="social-icon github fs-4" title="GitHub">
+    <i class="bi bi-github"></i>
+  </a>
+  <a href="https://linkedin.com/in/kullanicin" target="_blank" class="social-icon linkedin fs-4" title="LinkedIn">
+    <i class="bi bi-linkedin"></i>
+  </a>
+  <a href="https://instagram.com/kullanicin" target="_blank" class="social-icon instagram fs-4" title="Instagram">
+    <i class="bi bi-instagram"></i>
+  </a>
+  <a href="https://omerserfice.com.tr" target="_blank" class="social-icon website fs-4" title="Kişisel Site">
+    <i class="bi bi-globe2"></i>
+  </a>
+</div>
+<!-- Yetkinliklerim Bölümü -->
+<div class="skills-section mt-5">
+ 
+  <ul class="list-unstyled fs-5">
+    <li>Web, Mobile & Desktop Application</li>
+    <li>Javascript, Jquery, React JS, .NET Core MVC</li>
+    <li>Back-End & Front-End</li>
+    <li>C#, ASP.NET Core, ASP.NET Web API</li>
+    <li>Katmanlı Mimari (Multi-Layered Architecture)</li>
+    <li>JWT, Identity, Entity Framework Core, Logging</li>
+    <li>MongoDB, Docker, Nginx, Jenkins, CI, CD</li>
+  </ul>
+
+</div>
+
+
+
 </div>
 
 </body>
