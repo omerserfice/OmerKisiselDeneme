@@ -2,7 +2,132 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Ömer Serfice</h1>
-    <p>Kişisel Web Sitesi</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ömer Serfice</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      scroll-behavior: smooth;
+    }
+    header {
+      background-color: #343a40;
+      color: white;
+      padding: 100px 0;
+    }
+    section {
+      padding: 60px 0;
+    }
+    footer {
+      background-color: #f8f9fa;
+      padding: 30px 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Ömer Yılmaz</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#about">Hakkımda</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projeler</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">İletişim</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Header -->
+<header class="text-center">
+  <div class="container">
+    <h1 class="display-4">Merhaba, ben Ömer</h1>
+    <p class="lead">Yazılım Geliştirici • Web • Mobil • Masaüstü</p>
+  </div>
+</header>
+
+<!-- Hakkımda -->
+<section id="about" class="bg-light">
+  <div class="container">
+    <h2 class="text-center mb-4">Hakkımda</h2>
+    <p class="text-center">Ben yazılım geliştirme konusunda uzmanlaşmış bir geliştiriciyim. .NET, React ve mobil teknolojilerle projeler geliştiriyorum.</p>
+  </div>
+</section>
+
+<!-- Projeler -->
+<section id="projects">
+  <div class="container">
+    <h2 class="text-center mb-4">Projeler</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Proje 1">
+          <div class="card-body">
+            <h5 class="card-title">Proje 1</h5>
+            <p class="card-text">Web tabanlı hasta takip sistemi.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Proje 2">
+          <div class="card-body">
+            <h5 class="card-title">Proje 2</h5>
+            <p class="card-text">Mobil randevu yönetimi uygulaması.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Proje 3">
+          <div class="card-body">
+            <h5 class="card-title">Proje 3</h5>
+            <p class="card-text">Klinikler için masaüstü yazılım çözümü.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- İletişim -->
+<section id="contact" class="bg-light">
+  <div class="container">
+    <h2 class="text-center mb-4">İletişim</h2>
+    <form class="mx-auto" style="max-width: 600px;">
+      <div class="mb-3">
+        <label for="name" class="form-label">Ad Soyad</label>
+        <input type="text" class="form-control" id="name" placeholder="Adınızı girin">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">E-posta</label>
+        <input type="email" class="form-control" id="email" placeholder="E-posta adresinizi girin">
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Mesaj</label>
+        <textarea class="form-control" id="message" rows="5" placeholder="Mesajınızı yazın"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Gönder</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 Ömer Yılmaz | Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
