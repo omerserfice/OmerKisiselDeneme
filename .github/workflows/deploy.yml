@@ -1,8 +1,8 @@
-name: Docker Image Build and ECS Deployment
+name: Deploy to AWS ECS
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
@@ -13,73 +13,43 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
-      # 1. Kaynak kodunu checkout et
-      - name: Checkout repository
+      - name: Checkout source code
         uses: actions/checkout@v4
 
-      # 2. AWS kimlik bilgilerini yapılandır
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-access-key-id:     ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region:            ${{ secrets.AWS_REGION }}
 
-      # 3. Docker Buildx kurulumu
-      - name: Setup Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # 4. Amazon ECR'ye giriş yap
       - name: Login to Amazon ECR
-        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      # 5. Build için tag oluştur
-      - name: Generate image tag
-        id: tag
+      - name: Set image tag with run number
+        run: echo "TAG=build-${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+
+      - name: Build and push Docker image to ECR
         run: |
-          SHORT_SHA=$(echo ${GITHUB_SHA} | cut -c1-8)
-          echo "TAG=build-${GITHUB_RUN_NUMBER}-${SHORT_SHA}" >> $GITHUB_ENV
-          echo "IMAGE_URI=${{ env.ECR_REPO }}:$TAG" >> $GITHUB_ENV
+          docker buildx build \
+            --platform linux/amd64 \
+            -t $ECR_REPO:$TAG \
+            --push .
 
-      # 6. Docker imajını build et ve ECR'ye pushla
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          platforms: linux/amd64
-          push: true
-          tags: ${{ env.IMAGE_URI }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-      # 7. Task definition dosyasını güncelle
-      - name: Update task definition
+      - name: Replace image URI in task definition
         run: |
-          # Task definition dosyasını kontrol et
-          if [ ! -f "task-definition.json" ]; then
-            echo "task-definition.json bulunamadı!"
-            exit 1
-          fi
-          
-          jq --arg IMAGE_URI "${{ env.IMAGE_URI }}" \
-            '.containerDefinitions[0].image = $IMAGE_URI' \
-            task-definition.json > task-def-updated.json
-          
-          echo "Güncellenmiş task definition:"
-          cat task-def-updated.json
+          IMAGE_URI="$ECR_REPO:$TAG"
+          sed "s|IMAGE_URI|$IMAGE_URI|g" task-definition.json > task-def-updated.json
 
-      # 8. ECS'ye deploy et
-      - name: Deploy to ECS
+      - name: Deploy to Amazon ECS with updated task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: task-def-updated.json
-          service: ${{ env.ECS_SERVICE }}
-          cluster: ${{ env.ECS_CLUSTER }}
-          wait-for-service-stability: true
-          force-new-deployment: true
+          service: ${{ secrets.ECS_SERVICE }}
+          cluster: ${{ secrets.ECS_CLUSTER }}
+          wait-for-service-stability: false
