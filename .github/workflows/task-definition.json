@@ -1,0 +1,23 @@
+{
+    "family": "omer-kisisel-task",
+    "networkMode": "awsvpc",
+    "executionRoleArn": "arn:aws:ecs:us-east-1:522354331614:task/omer-kisisel-ecs-cluster/34835d63c9d146ebacaba28e4cd1719d",
+    "containerDefinitions": [
+      {
+        "name": "omer-kisisel-deneme",
+        "image": "IMAGE_URI",
+        "portMappings": [
+          {
+            "containerPort": 8080,
+            "protocol": "tcp"
+          }
+        ],
+        "essential": true
+      }
+    ],
+    "requiresCompatibilities": [
+      "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512"
+  }
